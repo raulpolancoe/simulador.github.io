@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Amortización</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Tabla de Amortización</h1>
+    <form id="formulario">
+        <label for="prestamo">Monto del Préstamo:</label>
+        <input type="text" id="prestamo" name="prestamo" />
+    
+        <label for="cuotas">Número de Cuotas:</label>
+        <select id="cuotas" name="cuotas" disabled>
+            <option value="" disabled selected>Seleccione el número de cuotas</option>
+        </select>
+    
+        <button type="submit">Calcular</button>
+    </form>
+    
+    <div id="resultado"></div>
+
+    <script src="cuotas.js"></script>
+</body>
+</html>
