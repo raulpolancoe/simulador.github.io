@@ -143,7 +143,7 @@ document.getElementById('prestamo').addEventListener('input', function () {
     const valorNumerico = parseFloat(this.value.replace(/[^\d]/g, '')) || 0;
 
     // Actualizar visualmente el valor en formato de moneda
-    this.value = formatoMoneda(valorNumerico);
+     this.value = formatoMoneda(valorNumerico).replace(/\s/g, '');
 
     // Almacenar el valor numérico puro en un atributo de datos para cálculos posteriores
     this.dataset.valorNumerico = valorNumerico;
