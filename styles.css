@@ -24,12 +24,14 @@ input, select, button {
   border-radius: 5px;
 }
 
+/* Botón Calcular */
 button {
   background-color: #4CAF50;
   color: white;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 20px; /* Mueve el botón hacia abajo */
 }
 
 button:hover {
@@ -64,7 +66,65 @@ tr:hover {
   background-color: #f1f1f1;
 }
 
+/* Resultados */
+#resultado {
+  margin-top: 30px; /* Asegura un buen margen para los resultados */
+}
+
 /* Estilos de modal (si lo usas) */
+/* Estilo general para los placeholders */
+input::placeholder, select::placeholder {
+  font-size: 18px; /* Ajusta el tamaño del texto del placeholder */
+  text-align: center; /* Centra el texto del placeholder */
+}
+
+/* Estilo para los campos de entrada y el select */
+input, select {
+  padding: 10px;
+  margin: 5px 0;
+  width: 20%;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center; /* Centra el texto dentro del campo */
+}
+
+/* Asegurarse de que los labels estén arriba de los inputs/selects */
+label {
+  display: block;   /* Hace que el label ocupe toda la línea y esté encima del campo */
+  margin-bottom: 5px; /* Espacio entre el título y el campo */
+  font-size: 18px;
+  text-align: center;
+  font-weight: bold;  /* Opcional: para hacer que el texto sea más destacado */
+}
+
+/* Centrar el contenedor del formulario */
+form {
+  text-align: center; /* Centra los elementos dentro del formulario */
+}
+
+/* Centrar el botón Calcular */
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+  width: 300px;  /* Puedes usar un valor fijo o un porcentaje, aquí se usa un valor fijo */
+  border-radius: 5px;
+  text-align: center; /* Centra el texto dentro del botón */
+  display: block; /* Hace que el botón sea un bloque */
+  margin-left: auto; /* Centra el botón a la izquierda */
+  margin-right: auto; /* Centra el botón a la derecha */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+
 .modal {
   display: none;
   position: fixed;
