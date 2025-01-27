@@ -57,10 +57,31 @@ function formatoMoneda(valor) {
 function formatoPorcentaje(valor) {
     return valor.toLocaleString('es-CO', {
         style: 'percent',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1
     });
 }
+
+// Funcion para obtener la fecha
+function calcularFecha() {
+    const hoy = new Date();
+    const dia = hoy.getDate();
+    const mes = hoy.getMonth();
+    const año = hoy.getFullYear();
+  
+    let fechaResultado;
+    const opciones = { day: "2-digit", month: "short", year: "numeric" };
+  
+    if (dia >= 1 && dia <= 10) {
+      fechaResultado = new Date(año, mes + 1, 5);
+    } else if (dia >= 10 && dia <= 20) {
+      fechaResultado = new Date(año, mes + 1, 15);
+    } else {
+      fechaResultado = new Date(año, mes + 1, 25);
+    }
+  
+    return fechaResultado.toLocaleDateString("es-ES", opciones);
+  }
 
 // Función para generar la tabla HTML
 function generarTablasHTML(tabla1, tabla2) {
@@ -69,8 +90,12 @@ function generarTablasHTML(tabla1, tabla2) {
         <table>
             <tbody>
                 <tr>
+                    <th>Fecha del primer pago</th>
+                    <td>${fechaPagoGlobal}</td>
+                </tr>
+                <tr>
                     <th>Monto de Crédito</th>
-                    <td>${formatoMoneda(tabla2.valorTotalPrestamo).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round(tabla2.valorTotalPrestamo)).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Tasa de interés M.V.</th>
@@ -86,23 +111,23 @@ function generarTablasHTML(tabla1, tabla2) {
                 </tr>
                 <tr>
                     <th>Cuota con VSF</th>
-                    <td>${formatoMoneda(tabla2.valorcuota + (tabla2.valorTotalPrestamo * 0.1) / tabla2.plazo).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round((tabla2.valorcuota + (tabla2.valorTotalPrestamo * 0.1) / tabla2.plazo))).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Cuota regular sin VSF</th>
-                    <td>${formatoMoneda(tabla2.valorcuota).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round(tabla2.valorcuota)).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor de Fianza IVA Incluido</th>
-                    <td>${formatoMoneda(tabla2.valorTotalPrestamo * 0.1).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round(tabla2.valorTotalPrestamo * 0.1)).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor total de intereses</th>
-                    <td>${formatoMoneda(tabla2.valorTotalIntereses).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round(tabla2.valorTotalIntereses)).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor total del crédito</th>
-                    <td>${formatoMoneda(tabla2.valorTotalCredito + tabla2.valorTotalPrestamo * 0.1).replace(/\s/g, '')}</td>
+                    <td>${formatoMoneda(Math.round((tabla2.valorTotalCredito + tabla2.valorTotalPrestamo * 0.1))).replace(/\s/g, '')}</td>
                 </tr>
             </tbody>
         </table>
@@ -120,15 +145,15 @@ function generarTablasHTML(tabla1, tabla2) {
                 </tr>
             </thead>
             <tbody>
-                ${tabla1.map(fila => `
+                ${tabla1.map(fila => ` 
                     <tr>
                         <td>${fila.cuota}</td>
-                        <td>${formatoMoneda(fila.saldoFinal).replace(/\s/g, '')}</td>
-                        <td>${formatoMoneda(fila.abonoCapital).replace(/\s/g, '')}</td>
-                        <td>${formatoMoneda(fila.interes).replace(/\s/g, '')}</td>
-                        <td>${formatoMoneda(fila.fianza).replace(/\s/g, '')}</td>
-                        <td>${formatoMoneda(fila.ivasf).replace(/\s/g, '')}</td>
-                        <td>${fila.cuotaValor === 0 ? '-' : formatoMoneda(fila.cuotaValor).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(Math.round(fila.saldoFinal)).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(Math.round(fila.abonoCapital)).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(Math.round(fila.interes)).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(Math.round(fila.fianza)).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(Math.round(fila.ivasf)).replace(/\s/g, '')}</td>
+                        <td>${fila.cuotaValor === 0 ? '-' : formatoMoneda(Math.round(fila.cuotaValor)).replace(/\s/g, '')}</td>
                     </tr>
                 `).join('')}
             </tbody>
@@ -136,23 +161,33 @@ function generarTablasHTML(tabla1, tabla2) {
     `;
 }
 
-// Evento para actualizar las cuotas según el monto
-// Formatear el valor del préstamo como moneda mientras se escribe
+// Función para actualizar los valores dinámicos en los campos de span
+function actualizarCamposDinamicos(prestamo, plazoMaximo, tasaAnual) {
+    const tasaMensual = Math.pow(1 + tasaAnual / 100, 1 / 12) - 1;
+    const cuotaMaxima = ((prestamo * tasaMensual * Math.pow(1 + tasaMensual, plazoMaximo)) / 
+                        (Math.pow(1 + tasaMensual, plazoMaximo) - 1));
+
+    // Actualizar los valores en los spans correspondientes
+        document.getElementById('valorCompra').textContent = formatoMoneda(prestamo).replace(/\s/g, '');
+        document.getElementById('plazo').textContent = plazoMaximo;
+        document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
+        document.getElementById('tasaInteres').textContent = formatoPorcentaje(tasaMensual);   
+}
+
+// Evento para manejar la entrada del monto y actualizar dinámicamente
+// Función para manejar la entrada del monto y actualizar dinámicamente
+// Función para manejar la entrada del monto y actualizar dinámicamente
 document.getElementById('prestamo').addEventListener('input', function () {
-    // Obtener el valor numérico puro eliminando cualquier símbolo o punto
     const valorNumerico = parseFloat(this.value.replace(/[^\d]/g, '')) || 0;
-
-    // Actualizar visualmente el valor en formato de moneda
-     this.value = formatoMoneda(valorNumerico).replace(/\s/g, '');
-
-    // Almacenar el valor numérico puro en un atributo de datos para cálculos posteriores
+    this.value = formatoMoneda(valorNumerico).replace(/\s/g, '');
     this.dataset.valorNumerico = valorNumerico;
 
-    // Actualizar las opciones del desplegable de cuotas
     const cuotasSelect = document.getElementById('cuotas');
     cuotasSelect.innerHTML = '<option value="" disabled selected>Seleccione el número de cuotas</option>';
 
     let opcionesCuotas = [];
+    let plazoMaximo = 0;
+
     if (valorNumerico >= 40000 && valorNumerico <= 100000) {
         opcionesCuotas = [1, 2, 3];
     } else if (valorNumerico >= 100001 && valorNumerico <= 250000) {
@@ -161,24 +196,75 @@ document.getElementById('prestamo').addEventListener('input', function () {
         opcionesCuotas = [1, 2, 3, 4, 5, 6];
     }
 
+    // Agregar opciones al select de cuotas
     opcionesCuotas.forEach(cuota => {
         const option = document.createElement('option');
         option.value = cuota;
         option.textContent = cuota;
         cuotasSelect.appendChild(option);
+        plazoMaximo = cuota; // Actualizar el plazo máximo permitido
     });
 
     cuotasSelect.disabled = opcionesCuotas.length === 0;
+
+    // Asignar la cuota máxima si no se ha seleccionado ninguna
+    if (opcionesCuotas.length > 0 && !cuotasSelect.value) {
+        cuotasSelect.value = plazoMaximo; // Selecciona la cuota máxima
+        // Actualiza los campos con la cuota máxima
+        actualizarCamposDinamicos(valorNumerico, plazoMaximo, 26.8242); // Actualiza los campos con la cuota máxima
+    }
+
+    // Aquí se valida si el monto del préstamo está en el rango adecuado
+    if (valorNumerico < 40000 || valorNumerico > 700000) {
+        document.getElementById('valorCompra').textContent = "Error: Monto fuera de rango";
+        document.getElementById('plazo').textContent = "Error";
+        document.getElementById('valorCuota').textContent = "Error";
+        document.getElementById('tasaInteres').textContent = "Error";
+    } else {
+        // Si el préstamo está en el rango adecuado, se actualizan los valores dinámicos
+        document.getElementById('valorCompra').textContent = formatoMoneda(valorNumerico).replace(/\s/g, '');
+    }
 });
 
-// Manejar el evento de envío del formulario
-document.getElementById('formulario').addEventListener('submit', function (event) {
-    event.preventDefault();
+// Evento para manejar la selección de cuotas y actualizar dinámicamente los valores
+document.getElementById('cuotas').addEventListener('change', function () {
+    const valorNumerico = parseFloat(document.getElementById('prestamo').dataset.valorNumerico) || 0;
+    const cuotas = parseInt(this.value);
+    
+    // Validar si el valor de préstamo está en el rango adecuado
+    if (valorNumerico < 40000 || valorNumerico > 700000) {
+        document.getElementById('valorCompra').textContent = "Error: Monto fuera de rango";
+        document.getElementById('plazo').textContent = "Error";
+        document.getElementById('valorCuota').textContent = "Error";
+        document.getElementById('tasaInteres').textContent = "Error";
+    } else {
+        // Actualizar el plazo
+        document.getElementById('plazo').textContent = cuotas;
 
-    // Leer el valor numérico puro del atributo de datos
+        // Calcular la cuota
+        const tasaAnual = 26.8242; // Tasa fija del 26.8242% anual
+        const tasaMensual = Math.pow(1 + tasaAnual / 100, 1 / 12) - 1;
+
+        // Calcular la cuota incluyendo el 10% adicional de fianza
+        const cuotaMaxima = ((valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / 
+                             (Math.pow(1 + tasaMensual, cuotas) - 1)) +
+                             ((valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / 
+                             (Math.pow(1 + tasaMensual, cuotas) - 1)) * 0.1;
+
+        // Actualizar el valor de la cuota
+        document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
+        
+        // Actualizar la tasa de interés mensual
+        document.getElementById('tasaInteres').textContent = formatoPorcentaje(tasaMensual);
+    }
+});
+
+// Evento para el botón "Calcular"
+document.getElementById('calcularBtn').addEventListener('click', function () {
     const prestamo = parseFloat(document.getElementById('prestamo').dataset.valorNumerico) || 0;
     const cuotas = parseInt(document.getElementById('cuotas').value);
     const tasaAnual = 26.8242; // Tasa fija del 26.8242% anual
+    fechaPagoGlobal = calcularFecha(); // Llamar a la función calcularFecha()
 
     if (prestamo < 40000 || prestamo > 700000) {
         alert('El monto del préstamo debe estar entre $40,000 y $700,000.');
@@ -192,10 +278,10 @@ document.getElementById('formulario').addEventListener('submit', function (event
 
     const resultado = calcularAmortizacion(prestamo, tasaAnual, cuotas);
 
-    // Calculando los valores para la segunda tabla (totales)
     let valorTotalIntereses = 0;
     let valorTotalCredito = prestamo;
     let tasaMensual = Math.pow(1 + tasaAnual / 100, 1 / 12) - 1;
+
     resultado.tablaAmortizacion.forEach(fila => {
         valorTotalIntereses += fila.interes;
     });
@@ -213,8 +299,8 @@ document.getElementById('formulario').addEventListener('submit', function (event
 
     // Mostrar el resultado en la página
     document.getElementById('resultado').innerHTML = `
-        <h2>Resultados del Crédito</h2>
-        <p><strong>Cuota Fija:</strong> ${formatoMoneda(parseFloat(resultado.cuotaFija))}</p>
+        <h2>Plan de pagos para tu credito</h2>
         ${generarTablasHTML(resultado.tablaAmortizacion, tabla2)}
     `;
 });
+
