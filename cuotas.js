@@ -246,10 +246,8 @@ document.getElementById('cuotas').addEventListener('change', function () {
         const tasaMensual = Math.pow(1 + tasaAnual / 100, 1 / 12) - 1;
 
         // Calcular la cuota incluyendo el 10% adicional de fianza
-        const cuotaMaxima = ((valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / 
-                             (Math.pow(1 + tasaMensual, cuotas) - 1)) +
-                             ((valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / 
-                             (Math.pow(1 + tasaMensual, cuotas) - 1)) * 0.1;
+        const cuotaBase = (valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / (Math.pow(1 + tasaMensual, cuotas) - 1);
+        const cuotaMaxima = cuotaBase + (valorNumerico * 0.1 / cuotas);
 
         // Actualizar el valor de la cuota
         document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
