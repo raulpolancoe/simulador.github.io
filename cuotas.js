@@ -5,6 +5,8 @@ function calcularAmortizacion(prestamo, tasaAnual, numCuotas) {
                       (Math.pow(1 + tasaMensual, numCuotas) - 1));
     let saldoPendiente = prestamo;
     let tablaAmortizacion = [];
+    let fianzas = Math.ceil(prestamo * 0.08403 / numCuotas);
+    let ivafiansas = (prestamo * 0.1/numCuotas) - fianzas;
 
     for (let i = 0; i <= numCuotas; i++) {
         if (i === 0) {
@@ -14,7 +16,9 @@ function calcularAmortizacion(prestamo, tasaAnual, numCuotas) {
                 interes: 0,
                 abonoCapital: 0,
                 saldoFinal: saldoPendiente,
-                cuotaValor: 0
+                cuotaValor: 0,
+                fianza: 0,
+                ivasf: 0
             });
         } else {
             const interes = saldoPendiente * tasaMensual;
@@ -27,7 +31,9 @@ function calcularAmortizacion(prestamo, tasaAnual, numCuotas) {
                 interes: interes,
                 abonoCapital: abonoCapital,
                 saldoFinal: saldoPendiente < 0 ? 0 : saldoPendiente,
-                cuotaValor: cuotaFija
+                cuotaValor: cuotaFija + fianzas + ivafiansas,
+                fianza: fianzas,
+                ivasf: ivafiansas
             });
         }
     }
@@ -64,7 +70,7 @@ function generarTablasHTML(tabla1, tabla2) {
             <tbody>
                 <tr>
                     <th>Monto de Crédito</th>
-                    <td>${formatoMoneda(tabla2.valorTotalPrestamo)}</td>
+                    <td>${formatoMoneda(tabla2.valorTotalPrestamo).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Tasa de interés M.V.</th>
@@ -79,24 +85,24 @@ function generarTablasHTML(tabla1, tabla2) {
                     <td>${formatoPorcentaje(tabla2.tarifafianza)}</td>
                 </tr>
                 <tr>
-                    <th>Cuota con VFS</th>
-                    <td>${formatoMoneda(tabla2.valorcuota + (tabla2.valorTotalPrestamo * 0.1) / tabla2.plazo)}</td>
+                    <th>Cuota con VSF</th>
+                    <td>${formatoMoneda(tabla2.valorcuota + (tabla2.valorTotalPrestamo * 0.1) / tabla2.plazo).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
-                    <th>Cuota regular sin VFS</th>
-                    <td>${formatoMoneda(tabla2.valorcuota)}</td>
+                    <th>Cuota regular sin VSF</th>
+                    <td>${formatoMoneda(tabla2.valorcuota).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor de Fianza IVA Incluido</th>
-                    <td>${formatoMoneda(tabla2.valorTotalPrestamo * 0.1)}</td>
+                    <td>${formatoMoneda(tabla2.valorTotalPrestamo * 0.1).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor total de intereses</th>
-                    <td>${formatoMoneda(tabla2.valorTotalIntereses)}</td>
+                    <td>${formatoMoneda(tabla2.valorTotalIntereses).replace(/\s/g, '')}</td>
                 </tr>
                 <tr>
                     <th>Valor total del crédito</th>
-                    <td>${formatoMoneda(tabla2.valorTotalCredito + tabla2.valorTotalPrestamo * 0.1)}</td>
+                    <td>${formatoMoneda(tabla2.valorTotalCredito + tabla2.valorTotalPrestamo * 0.1).replace(/\s/g, '')}</td>
                 </tr>
             </tbody>
         </table>
@@ -105,10 +111,11 @@ function generarTablasHTML(tabla1, tabla2) {
             <thead>
                 <tr>
                     <th>Número de Cuota</th>
-                    <th>Saldo Inicial</th>
-                    <th>Intereses</th>
+                    <th>Saldo a capital despues del pago</th>
                     <th>Abono a Capital</th>
-                    <th>Saldo Final</th>
+                    <th>Intereses</th>
+                    <th>Servicio Fianza</th>
+                    <th>IVA SF</th>
                     <th>Valor de la Cuota</th>
                 </tr>
             </thead>
@@ -116,11 +123,12 @@ function generarTablasHTML(tabla1, tabla2) {
                 ${tabla1.map(fila => `
                     <tr>
                         <td>${fila.cuota}</td>
-                        <td>${formatoMoneda(fila.saldoInicial)}</td>
-                        <td>${formatoMoneda(fila.interes)}</td>
-                        <td>${formatoMoneda(fila.abonoCapital)}</td>
-                        <td>${formatoMoneda(fila.saldoFinal)}</td>
-                        <td>${fila.cuotaValor === 0 ? '-' : formatoMoneda(fila.cuotaValor)}</td>
+                        <td>${formatoMoneda(fila.saldoFinal).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(fila.abonoCapital).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(fila.interes).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(fila.fianza).replace(/\s/g, '')}</td>
+                        <td>${formatoMoneda(fila.ivasf).replace(/\s/g, '')}</td>
+                        <td>${fila.cuotaValor === 0 ? '-' : formatoMoneda(fila.cuotaValor).replace(/\s/g, '')}</td>
                     </tr>
                 `).join('')}
             </tbody>
@@ -129,24 +137,30 @@ function generarTablasHTML(tabla1, tabla2) {
 }
 
 // Evento para actualizar las cuotas según el monto
+// Formatear el valor del préstamo como moneda mientras se escribe
 document.getElementById('prestamo').addEventListener('input', function () {
-    const prestamo = parseFloat(this.value.replace(/[.-]+/g, ''));
-    const cuotasSelect = document.getElementById('cuotas');
+    // Obtener el valor numérico puro eliminando cualquier símbolo o punto
+    const valorNumerico = parseFloat(this.value.replace(/[^\d]/g, '')) || 0;
 
-    // Limpiar las opciones actuales del desplegable
+    // Actualizar visualmente el valor en formato de moneda
+    this.value = formatoMoneda(valorNumerico);
+
+    // Almacenar el valor numérico puro en un atributo de datos para cálculos posteriores
+    this.dataset.valorNumerico = valorNumerico;
+
+    // Actualizar las opciones del desplegable de cuotas
+    const cuotasSelect = document.getElementById('cuotas');
     cuotasSelect.innerHTML = '<option value="" disabled selected>Seleccione el número de cuotas</option>';
 
-    // Determinar las opciones de cuotas según el monto del préstamo
     let opcionesCuotas = [];
-    if (prestamo >= 40000 && prestamo <= 100000) {
+    if (valorNumerico >= 40000 && valorNumerico <= 100000) {
         opcionesCuotas = [1, 2, 3];
-    } else if (prestamo >= 100001 && prestamo <= 250000) {
+    } else if (valorNumerico >= 100001 && valorNumerico <= 250000) {
         opcionesCuotas = [1, 2, 3, 4];
-    } else if (prestamo >= 250001 && prestamo <= 700000) {
+    } else if (valorNumerico >= 250001 && valorNumerico <= 700000) {
         opcionesCuotas = [1, 2, 3, 4, 5, 6];
     }
 
-    // Añadir las opciones válidas al desplegable
     opcionesCuotas.forEach(cuota => {
         const option = document.createElement('option');
         option.value = cuota;
@@ -154,7 +168,6 @@ document.getElementById('prestamo').addEventListener('input', function () {
         cuotasSelect.appendChild(option);
     });
 
-    // Deshabilitar el select si el monto no está en el rango permitido
     cuotasSelect.disabled = opcionesCuotas.length === 0;
 });
 
@@ -162,7 +175,8 @@ document.getElementById('prestamo').addEventListener('input', function () {
 document.getElementById('formulario').addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const prestamo = parseFloat(document.getElementById('prestamo').value.replace(/[.-]+/g, ''));
+    // Leer el valor numérico puro del atributo de datos
+    const prestamo = parseFloat(document.getElementById('prestamo').dataset.valorNumerico) || 0;
     const cuotas = parseInt(document.getElementById('cuotas').value);
     const tasaAnual = 26.8242; // Tasa fija del 26.8242% anual
 
