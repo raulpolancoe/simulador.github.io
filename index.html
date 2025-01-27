@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Calculadora de Tabla de Amortización</h1>
+    <h1>Calcula tu credito KeyPago</h1>
     <form id="formulario">
-        <label for="prestamo">Monto del Préstamo:</label>
-        <input type="text" id="prestamo" name="prestamo" placeholder="$40,000" />
-    
-        <label for="cuotas">Número de Cuotas:</label>
-        <select id="cuotas" name="cuotas" disabled>
-            <option value="" disabled selected>Seleccione el número de cuotas</option>
-        </select>
-    
-        <button type="submit">Calcular</button>
+        <label for="prestamo">Ingresa el valor de tu compra</label>
+        <input type="text" id="prestamo" placeholder="Ej: $40.000">
+        <label for="cuotas">Elije el plazo de tu crédito</label>
+        <select id="cuotas"></select>
     </form>
-    
+        
+    <p>Valor de la compra: <span id="valorCompra"></span></p>
+    <p>Plazo: <span id="plazo"></span></p>
+    <p>Valor Cuota: <span id="valorCuota"></span></p>
+    <p>Tasa de Interés M.V.: <span id="tasaInteres"></span></p>
+
+    <button id="calcularBtn">Calcula tu plan de pagos</button>
+
     <div id="resultado"></div>
 
     <script src="cuotas.js"></script>
