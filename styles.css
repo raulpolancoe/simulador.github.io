@@ -16,10 +16,9 @@ form {
 }
 
 input, select, button {
-  padding: 10px;
+  padding: 8px; /* Reducir padding */
   margin: 5px 0;
-  width: 100%;
-  font-size: 16px;
+  font-size: 14px; /* Reducir el tamaño de la fuente */
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -32,6 +31,9 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 20px; /* Mueve el botón hacia abajo */
+  width: 200px; /* Establecer un ancho fijo para el botón */
+  font-size: 14px; /* Reducir tamaño de fuente */
+  padding: 8px; /* Reducir padding */
 }
 
 button:hover {
@@ -41,16 +43,18 @@ button:hover {
 /* Tablas */
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 50%; /* Hacer la tabla más pequeña */
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: auto; /* Centra el botón a la izquierda */
+  margin-right: auto; /* Centra el botón a la derecha */
 }
 
 th, td {
   border: 1px solid #ddd;
   text-align: center;
-  padding: 12px;
+  padding: 8px; /* Reducir padding de las celdas */
 }
 
 th {
@@ -69,21 +73,22 @@ tr:hover {
 /* Resultados */
 #resultado {
   margin-top: 30px; /* Asegura un buen margen para los resultados */
+  text-align: center; /* Centra el texto del placeholder */
 }
 
 /* Estilos de modal (si lo usas) */
 /* Estilo general para los placeholders */
 input::placeholder, select::placeholder {
-  font-size: 18px; /* Ajusta el tamaño del texto del placeholder */
+  font-size: 16px; /* Ajusta el tamaño del texto del placeholder */
   text-align: center; /* Centra el texto del placeholder */
 }
 
 /* Estilo para los campos de entrada y el select */
 input, select {
-  padding: 10px;
+  padding: 8px;
   margin: 5px 0;
-  width: 20%;
-  font-size: 16px;
+  width: 50%; /* Reducir el ancho de los inputs/select */
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center; /* Centra el texto dentro del campo */
@@ -93,7 +98,7 @@ input, select {
 label {
   display: block;   /* Hace que el label ocupe toda la línea y esté encima del campo */
   margin-bottom: 5px; /* Espacio entre el título y el campo */
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
   font-weight: bold;  /* Opcional: para hacer que el texto sea más destacado */
 }
@@ -142,7 +147,7 @@ button:hover {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 70%;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -171,5 +176,13 @@ button:hover {
 
   table {
       font-size: 14px;
+  }
+
+  input, select {
+      width: 80%; /* Hacer los campos más pequeños en pantallas pequeñas */
+  }
+
+  button {
+      width: 80%; /* Hacer el botón más pequeño en pantallas pequeñas */
   }
 }
