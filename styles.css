@@ -21,6 +21,7 @@ input, select, button {
   font-size: 14px; /* Reducir el tamaño de la fuente */
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;  /* Se asegura de que los campos ocupen todo el ancho disponible */
 }
 
 /* Botón Calcular */
@@ -31,7 +32,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 20px; /* Mueve el botón hacia abajo */
-  width: 200px; /* Establecer un ancho fijo para el botón */
+  width: 100%; /* El botón ocupa el 100% del ancho */
   font-size: 14px; /* Reducir tamaño de fuente */
   padding: 8px; /* Reducir padding */
 }
@@ -43,12 +44,12 @@ button:hover {
 /* Tablas */
 table {
   border-collapse: collapse;
-  width: 50%; /* Hacer la tabla más pequeña */
+  width: 50%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-left: auto; /* Centra el botón a la izquierda */
-  margin-right: auto; /* Centra el botón a la derecha */
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
 }
 
 th, td {
@@ -73,7 +74,7 @@ tr:hover {
 /* Resultados */
 #resultado {
   margin-top: 30px; /* Asegura un buen margen para los resultados */
-  text-align: center; /* Centra el texto del placeholder */
+  text-align: center; /* Centra el texto */
 }
 
 /* Estilos de modal (si lo usas) */
@@ -147,7 +148,7 @@ button:hover {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 70%;
+  width: 70%;  /* Ajustamos el tamaño para escritorio */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -170,19 +171,31 @@ button:hover {
       padding: 10px;
   }
 
+  h1 {
+    font-size: 20px; /* Reducir tamaño de fuente del título */
+  }
+
   form {
       margin-bottom: 10px;
   }
 
   table {
-      font-size: 14px;
+    font-size: 12px;  /* Reducir el tamaño de las tablas */
+    width: 100%; /* Hacer la tabla ocupar todo el ancho */
   }
 
   input, select {
-      width: 80%; /* Hacer los campos más pequeños en pantallas pequeñas */
+    width: 100%; /* Los inputs y selects ocupan el 100% del ancho */
+    font-size: 16px; /* Tamaño adecuado para móviles */
   }
 
   button {
-      width: 80%; /* Hacer el botón más pequeño en pantallas pequeñas */
+    width: 100%; /* El botón ocupa el 100% del ancho */
+    font-size: 16px; /* Ajustar el tamaño de la fuente */
+    padding: 12px; /* Aumentar padding para facilidad de clic */
+  }
+
+  .modal-content {
+    width: 90%;  /* Hacer que el modal ocupe el 90% del ancho en pantallas móviles */
   }
 }
