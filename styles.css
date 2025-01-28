@@ -23,7 +23,7 @@ form {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 20px;
-  width: 300px;  /* Botón con un ancho fijo */
+  width: 40%;  /* Botón con un ancho fijo */
   font-size: 14px;
   padding: 8px;
   margin-left: auto;
