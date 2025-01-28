@@ -116,7 +116,7 @@ button {
   margin-right: auto; /* Centra el botón a la derecha */
 }
 
-button:hover {
+boton:hover {
   background-color: #45a049;
 }
 
@@ -180,7 +180,7 @@ button:hover {
     width: 100%; /* Hacer la tabla ocupar todo el ancho */
   }
 
-  button {
+  boton {
     width: 100%; /* El botón ocupa el 100% del ancho */
     font-size: 16px; /* Ajustar el tamaño de la fuente */
     padding: 12px; /* Aumentar padding para facilidad de clic */
