@@ -23,7 +23,7 @@ form {
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-top: 20px; /* Mueve el botón hacia abajo */
-  width: 100%; /* El botón ocupa el 100% del ancho */
+  width: 50%; /* El botón ocupa el 100% del ancho */
   font-size: 14px; /* Reducir tamaño de fuente */
   padding: 8px; /* Reducir padding */
 }
