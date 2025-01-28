@@ -1,6 +1,6 @@
 /* Estilo general */
 body {
-  ont-family: "Montserrat", Sans-serif;
+  font-family: "Montserrat", Sans-serif;
   margin: 20px;
   padding: 20px;
   background-color: #f9f9f9;
@@ -36,10 +36,34 @@ form {
 /* Tablas */
 table {
   border-collapse: collapse;
-  width: 60%; /* Hacer la tabla más pequeña en pantallas grandes */
+  width: 50%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
+}
+
+/* Tablas */
+.table1, .table2 {
+  border-collapse: collapse;
+  width: 80%; /* Ajustamos el ancho en pantallas grandes */
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table1 {
+  width: 100%; /* Para asegurar que ocupe el 100% en dispositivos pequeños */
+}
+
+.table2 {
+  width: 100%; /* Para asegurar que ocupe el 100% en dispositivos pequeños */
+}
+
+.resultadotabla {
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
 }
@@ -67,6 +91,8 @@ tr:hover {
 #resultado {
   margin-top: 30px; /* Asegura un buen margen para los resultados */
   text-align: center; /* Centra el texto */
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
 }
 
 /* Estilo general para los placeholders */
@@ -110,16 +136,25 @@ form {
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
+}
+
+.modal-content1 {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;  /* Ajustamos el tamaño para escritorio */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
 }
 
 .modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 70%;  /* Ajustamos el tamaño para escritorio */
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;  /* Ajustamos el tamaño para escritorio */
+  margin-left: auto; /* Centra la tabla */
+  margin-right: auto; /* Centra la tabla */
 }
 
 .close {
@@ -159,6 +194,11 @@ form {
     width: 100%; /* Hacer la tabla ocupar todo el ancho */
   }
 
+  .table1, .table2 {
+    font-size: 12px;  /* Reducir el tamaño de las tablas */
+    width: 100%; /* Hacer la tabla ocupar todo el ancho */
+  }
+
   .boton {
     width: 100%; /* El botón ocupa el 100% del ancho */
     font-size: 16px; /* Ajustar el tamaño de la fuente */
@@ -166,6 +206,6 @@ form {
   }
 
   .modal-content {
-    width: 90%;  /* Hacer que el modal ocupe el 90% del ancho en pantallas móviles */
+    width: 100%;  /* Hacer que el modal ocupe el 90% del ancho en pantallas móviles */
   }
 }
