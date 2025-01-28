@@ -80,7 +80,7 @@ tr:hover {
 /* Estilos de modal (si lo usas) */
 /* Estilo general para los placeholders */
 input::placeholder, select::placeholder {
-  font-size: 1vw;  /* 4% del ancho de la ventana */
+  font-size: 0.8em; /* Ajustar el tamaño del placeholder al 70% del tamaño del campo */
   text-align: center; /* Centra el texto del placeholder */
 }
 
