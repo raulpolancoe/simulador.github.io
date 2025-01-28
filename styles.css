@@ -22,12 +22,13 @@ form {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px; /* Mueve el botón hacia abajo */
-  width: 300px; /* El botón ocupa el 100% del ancho */
-  font-size: 14px; /* Reducir tamaño de fuente */
-  padding: 8px; /* Reducir padding */
+  margin-top: 20px;
+  width: 300px;  /* Botón con un ancho fijo */
+  font-size: 14px;
+  padding: 8px;
   margin-left: auto;
   margin-right: auto;
+  display: block; /* Necesario para centrar con margin-left y margin-right */
 }
 
 .boton:hover {
