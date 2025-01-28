@@ -16,7 +16,7 @@ form {
 }
 
 /* Botón Calcular */
-button {
+.button {
   background-color: #4CAF50;
   color: white;
   border: none;
