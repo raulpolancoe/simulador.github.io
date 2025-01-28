@@ -15,15 +15,6 @@ form {
   margin-bottom: 20px;
 }
 
-input, select, button {
-  padding: 8px; /* Reducir padding */
-  margin: 5px 0;
-  font-size: 14px; /* Reducir el tamaño de la fuente */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;  /* Se asegura de que los campos ocupen todo el ancho disponible */
-}
-
 /* Botón Calcular */
 button {
   background-color: #4CAF50;
@@ -85,14 +76,14 @@ input::placeholder, select::placeholder {
 }
 
 /* Estilo para los campos de entrada y el select */
-input, select {
-  padding: 8px;
+input, select, button {
+  padding: 8px; /* Reducir padding */
   margin: 5px 0;
-  width: 50%; /* Reducir el ancho de los inputs/select */
-  font-size: 14px;
+  font-size: 14px; /* Reducir el tamaño de la fuente */
   border: 1px solid #ccc;
   border-radius: 5px;
-  text-align: center; /* Centra el texto dentro del campo */
+  width: 80%; /* Se asegura de que los campos ocupen todo el ancho disponible */
+  box-sizing: border-box; /* Asegura que el padding y los bordes no afecten el tamaño */
 }
 
 /* Asegurarse de que los labels estén arriba de los inputs/selects */
@@ -182,11 +173,6 @@ button:hover {
   table {
     font-size: 12px;  /* Reducir el tamaño de las tablas */
     width: 100%; /* Hacer la tabla ocupar todo el ancho */
-  }
-
-  input, select {
-    width: 100%; /* Los inputs y selects ocupan el 100% del ancho */
-    font-size: 16px; /* Tamaño adecuado para móviles */
   }
 
   button {
