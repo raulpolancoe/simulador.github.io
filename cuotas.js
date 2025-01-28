@@ -87,7 +87,8 @@ function calcularFecha() {
 function generarTablasHTML(tabla1, tabla2) {
     return `
         <!-- Segunda Tabla: Totales -->
-        <table>
+        <div>
+        <table class="table1">
             <tbody>
                 <tr>
                     <th>Fecha del primer pago</th>
@@ -131,8 +132,10 @@ function generarTablasHTML(tabla1, tabla2) {
                 </tr>
             </tbody>
         </table>
+        </div>
         <!-- Primera Tabla: Amortización -->
-        <table>
+        <div>
+        <table class="table2">
             <thead>
                 <tr>
                     <th>Número de Cuota</th>
@@ -158,6 +161,7 @@ function generarTablasHTML(tabla1, tabla2) {
                 `).join('')}
             </tbody>
         </table>
+        </div>
     `;
 }
 
@@ -315,4 +319,3 @@ window.addEventListener('click', function (event) {
         document.getElementById('resultado-modal').style.display = "none";
     }
 });
-
