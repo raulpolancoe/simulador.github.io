@@ -9,20 +9,33 @@
 <body>
     <h1>Calcula tu credito KeyPago</h1>
     <form id="formulario">
-        <label for="prestamo">Ingresa el valor de tu compra</label>
-        <input type="text" id="prestamo" placeholder="Ej: $40.000">
-        <label for="cuotas">Elije el plazo de tu crédito</label>
-        <select id="cuotas"></select>
+    <table>
+        <th>
+            <label for="prestamo">Ingresa el valor de tu compra</label>
+            <input type="text" id="prestamo" placeholder="Ej: $40.000">
+            <label for="cuotas">Elije el plazo de tu crédito</label>
+            <select id="cuotas"></select>
+        </th>
+        <th>
+            <p>Valor de la compra: <span id="valorCompra"></span></p>
+            <p>Plazo: <span id="plazo"></span></p>
+            <p>Valor Cuota: <span id="valorCuota"></span></p>
+            <p>Tasa de Interés M.V.: <span id="tasaInteres"></span></p>
+        </th>
+    </table>
     </form>
         
-    <p>Valor de la compra: <span id="valorCompra"></span></p>
-    <p>Plazo: <span id="plazo"></span></p>
-    <p>Valor Cuota: <span id="valorCuota"></span></p>
-    <p>Tasa de Interés M.V.: <span id="tasaInteres"></span></p>
-
     <button id="calcularBtn">Calcula tu plan de pagos</button>
 
-    <div id="resultado"></div>
+    <!-- Modal -->
+    <div id="resultado-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <label>Plan de pagos de tu compra</label>
+            <div id="tablaAmortizacion"></div> <!-- Aquí irá la tabla de amortización generada -->
+        </div>
+    </div>
+
 
     <script src="cuotas.js"></script>
 </body>
