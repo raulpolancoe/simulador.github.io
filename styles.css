@@ -105,7 +105,7 @@ input::placeholder, select::placeholder {
 }
 
 /* Estilo para los campos de entrada y el select */
-input, select, button {
+input, select {
   padding: 8px; /* Reducir padding */
   margin: 5px 0;
   font-size: 14px; /* Reducir el tamaño de la fuente */
