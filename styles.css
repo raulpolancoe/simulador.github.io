@@ -44,7 +44,7 @@ button:hover {
 /* Tablas */
 table {
   border-collapse: collapse;
-  width: 50%; /* Hacer la tabla más pequeña en pantallas grandes */
+  width: 70%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
