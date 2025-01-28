@@ -154,6 +154,12 @@ button:hover {
 .close:hover {
   color: black;
 }
+.izquierdo{
+    width: 40%;
+}
+.derecho{
+    width: 60%;
+}
 
 /* Responsividad */
 @media (max-width: 600px) {
