@@ -248,7 +248,7 @@ document.getElementById('cuotas').addEventListener('change', function () {
         // Calcular la cuota incluyendo el 10% adicional de fianza
         const cuotaBase = (valorNumerico * tasaMensual * Math.pow(1 + tasaMensual, cuotas)) / (Math.pow(1 + tasaMensual, cuotas) - 1);
         const cuotaMaxima = cuotaBase + (valorNumerico * 0.1 / cuotas);
-
+        
         // Actualizar el valor de la cuota
         document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
         
@@ -295,10 +295,24 @@ document.getElementById('calcularBtn').addEventListener('click', function () {
         valorcuota: parseFloat(resultado.cuotaFija),
     };
 
-    // Mostrar el resultado en la página
-    document.getElementById('resultado').innerHTML = `
-        <h2>Plan de pagos para tu credito</h2>
+    // Mostrar el resultado en el modal
+    const modalContent = document.getElementById('tablaAmortizacion');
+    modalContent.innerHTML = `
         ${generarTablasHTML(resultado.tablaAmortizacion, tabla2)}
     `;
+// Mostrar el modal
+document.getElementById('resultado-modal').style.display = "block";
+});
+
+// Cerrar el modal al hacer clic en el botón de cierre
+document.getElementById('close-modal').addEventListener('click', function () {
+    document.getElementById('resultado-modal').style.display = "none";
+});
+
+// Cerrar el modal al hacer clic fuera del modal
+window.addEventListener('click', function (event) {
+    if (event.target === document.getElementById('resultado-modal')) {
+        document.getElementById('resultado-modal').style.display = "none";
+    }
 });
 
