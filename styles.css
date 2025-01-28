@@ -1,6 +1,6 @@
 /* Estilo general */
 body {
-  font-family: Arial, sans-serif;
+  ont-family: "Montserrat", Sans-serif;
   margin: 20px;
   padding: 20px;
   background-color: #f9f9f9;
@@ -16,9 +16,9 @@ form {
 }
 
 /* Botón Calcular */
-.button {
-  background-color: #4CAF50;
-  color: white;
+.boton {
+  background-color: #DCF028;
+  color: #1E163B;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -28,8 +28,9 @@ form {
   padding: 8px; /* Reducir padding */
 }
 
-button:hover {
-  background-color: #45a049;
+.boton:hover {
+  background-color: #8E6EC8;
+  color: white;
 }
 
 /* Tablas */
@@ -99,28 +100,6 @@ form {
   text-align: center; /* Centra los elementos dentro del formulario */
 }
 
-/* Centrar el botón Calcular */
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
-  font-size: 16px;
-  width: 300px;  /* Puedes usar un valor fijo o un porcentaje, aquí se usa un valor fijo */
-  border-radius: 5px;
-  text-align: center; /* Centra el texto dentro del botón */
-  display: block; /* Hace que el botón sea un bloque */
-  margin-left: auto; /* Centra el botón a la izquierda */
-  margin-right: auto; /* Centra el botón a la derecha */
-}
-
-boton:hover {
-  background-color: #45a049;
-}
-
-
 .modal {
   display: none;
   position: fixed;
@@ -180,7 +159,7 @@ boton:hover {
     width: 100%; /* Hacer la tabla ocupar todo el ancho */
   }
 
-  boton {
+  .boton {
     width: 100%; /* El botón ocupa el 100% del ancho */
     font-size: 16px; /* Ajustar el tamaño de la fuente */
     padding: 12px; /* Aumentar padding para facilidad de clic */
