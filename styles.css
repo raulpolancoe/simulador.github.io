@@ -15,6 +15,9 @@ form {
   margin-bottom: 20px;
 }
 
+.planpago {
+  text-align: center; /* Centra los elementos dentro del formulario */
+}
 /* Botón Calcular */
 .boton {
   background-color: #DCF028;
