@@ -81,7 +81,7 @@ input, select, button {
   font-size: 14px; /* Reducir el tamaño de la fuente */
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 70%; /* Se asegura de que los campos ocupen todo el ancho disponible */
+  width: 100%; /* Se asegura de que los campos ocupen todo el ancho disponible */
   box-sizing: border-box; /* Asegura que el padding y los bordes no afecten el tamaño */
 }
 
