@@ -35,7 +35,7 @@ button:hover {
 /* Tablas */
 table {
   border-collapse: collapse;
-  width: 70%; /* Hacer la tabla más pequeña en pantallas grandes */
+  width: 60%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
   background-color: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -68,10 +68,9 @@ tr:hover {
   text-align: center; /* Centra el texto */
 }
 
-/* Estilos de modal (si lo usas) */
 /* Estilo general para los placeholders */
 input::placeholder, select::placeholder {
-  font-size: 0.8em; /* Ajustar el tamaño del placeholder al 70% del tamaño del campo */
+  font-size: 1em; /* Ajustar el tamaño del placeholder al 70% del tamaño del campo */
   text-align: center; /* Centra el texto del placeholder */
 }
 
@@ -82,7 +81,7 @@ input, select, button {
   font-size: 14px; /* Reducir el tamaño de la fuente */
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 80%; /* Se asegura de que los campos ocupen todo el ancho disponible */
+  width: 70%; /* Se asegura de que los campos ocupen todo el ancho disponible */
   box-sizing: border-box; /* Asegura que el padding y los bordes no afecten el tamaño */
 }
 
