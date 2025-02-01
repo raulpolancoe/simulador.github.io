@@ -3,7 +3,7 @@ body {
   font-family: "Montserrat", Sans-serif;
   margin: 20px;
   padding: 20px;
-  background-color: f4f4f4;
+  background-color: ffffff;
 }
 
 h1 {
@@ -47,7 +47,7 @@ table {
   border-collapse: collapse;
   width: 50%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
-  background-color: #f4f4f4;
+  background-color: #ffffff; /*#f4f4f4 por #ffffff */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
@@ -58,7 +58,7 @@ table {
   border-collapse: collapse;
   width: 80%; /* Ajustamos el ancho en pantallas grandes */
   margin-top: 20px;
-  background-color: f4f4f4;
+  background-color: ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-left: auto;
   margin-right: auto;
@@ -78,22 +78,22 @@ table {
 }
 
 th, td {
-  border: 1px solid #f4f4f4;
+  border: 1px solid #ffffff; /*#f4f4f4 por #ffffff */ /*#f4f4f4 por #ffffff */
   text-align: center;
   padding: 8px; /* Reducir padding de las celdas */
 }
 
 th {
-  background-color: #f4f4f4;
+  background-color: #ffffff; /*#f4f4f4 por #ffffff */
   color: #333;
 }
 
 tr:nth-child(even) {
-  background-color: #f4f4f4;
+  background-color: #ffffff; /*#f4f4f4 por #ffffff */
 }
 
 tr:hover {
-  background-color: #f4f4f4;
+  background-color: #ffffff; /*#f4f4f4 por #ffffff */
 }
 
 /* Resultados */
@@ -148,7 +148,7 @@ form {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: #f4f4f4;
+  background-color: #ffffff; /*#f4f4f4 por #ffffff */
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
 }
@@ -159,7 +159,7 @@ form {
   border: 1px solid #888;
   width: 80%;  /* Ajustamos el tamaño para escritorio */
   border-radius: 10px;
-  box-shadow: 0 4px 8px #f4f4f4;
+  box-shadow: 0 4px 8px #ffffff; /*#f4f4f4 por #ffffff */
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
 }
