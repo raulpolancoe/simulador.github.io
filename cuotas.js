@@ -8,7 +8,7 @@ function calcularAmortizacion(prestamo, tasaAnual, numCuotas) {
     let fianzas = Math.ceil(prestamo * 0.08403 / numCuotas);
     let ivafiansas = (prestamo * 0.1/numCuotas) - fianzas;
 
-    for (let i = 0; i <= numCuotas; i++) {
+    for (let i = 1; i <= numCuotas; i++) {
         if (i === 0) {
             tablaAmortizacion.push({
                 cuota: i,
@@ -111,13 +111,13 @@ function generarTablasHTML(tabla1, tabla2) {
                     <td>${formatoPorcentaje(tabla2.tarifafianza)}</td>
                 </tr>
                 <tr>
-                    <th>Cuota con VSF</th>
+                    <th>Valor cuota</th>
                     <td>${formatoMoneda(Math.round((tabla2.valorcuota + (tabla2.valorTotalPrestamo * 0.1) / tabla2.plazo))).replace(/\s/g, '')}</td>
                 </tr>
-                <tr>
+                <!--tr>
                     <th>Cuota regular sin VSF</th>
                     <td>${formatoMoneda(Math.round(tabla2.valorcuota)).replace(/\s/g, '')}</td>
-                </tr>
+                </tr-->
                 <tr>
                     <th>Valor de Fianza IVA Incluido</th>
                     <td>${formatoMoneda(Math.round(tabla2.valorTotalPrestamo * 0.1)).replace(/\s/g, '')}</td>
@@ -167,15 +167,17 @@ function generarTablasHTML(tabla1, tabla2) {
 
 // Función para actualizar los valores dinámicos en los campos de span
 function actualizarCamposDinamicos(prestamo, plazoMaximo, tasaAnual) {
+    if (!plazoMaximo) return; // Evitar errores si no hay cuotas seleccionadas
+
     const tasaMensual = Math.pow(1 + tasaAnual / 100, 1 / 12) - 1;
     const cuotaMaxima = ((prestamo * tasaMensual * Math.pow(1 + tasaMensual, plazoMaximo)) / 
-                        (Math.pow(1 + tasaMensual, plazoMaximo) - 1));
+                        (Math.pow(1 + tasaMensual, plazoMaximo) - 1)) + (prestamo * 0.1 / plazoMaximo); // Se suma el 10% de fianza
 
     // Actualizar los valores en los spans correspondientes
-        document.getElementById('valorCompra').textContent = formatoMoneda(prestamo).replace(/\s/g, '');
-        document.getElementById('plazo').textContent = plazoMaximo;
-        document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
-        document.getElementById('tasaInteres').textContent = formatoPorcentaje(tasaMensual);   
+    document.getElementById('valorCompra').textContent = formatoMoneda(prestamo).replace(/\s/g, '');
+    document.getElementById('plazo').textContent = plazoMaximo;
+    document.getElementById('valorCuota').textContent = formatoMoneda(Math.round(cuotaMaxima)).replace(/\s/g, '');
+    document.getElementById('tasaInteres').textContent = formatoPorcentaje(tasaMensual);   
 }
 
 // Evento para manejar la entrada del monto y actualizar dinámicamente
@@ -214,9 +216,10 @@ document.getElementById('prestamo').addEventListener('input', function () {
     // Asignar la cuota máxima si no se ha seleccionado ninguna
     if (opcionesCuotas.length > 0 && !cuotasSelect.value) {
         cuotasSelect.value = plazoMaximo; // Selecciona la cuota máxima
+    }// Selecciona la cuota máxima
         // Actualiza los campos con la cuota máxima
-        actualizarCamposDinamicos(valorNumerico, plazoMaximo, 26.8242); // Actualiza los campos con la cuota máxima
-    }
+    actualizarCamposDinamicos(valorNumerico, plazoMaximo, 26.8242); // Actualiza los campos con la cuota máxima
+    
 
     // Aquí se valida si el monto del préstamo está en el rango adecuado
     if (valorNumerico < 40000 || valorNumerico > 700000) {
