@@ -12,7 +12,9 @@ h1 {
 }
 
 form {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Botón Calcular */
@@ -22,10 +24,17 @@ form {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  display: block;
+  margin: 20px auto; /* Centra horizontalmente */
+  width: 200px; /* Mantiene el ancho fijo */
+  text-align: center;
+
   margin-top: 20px; /* Mueve el botón hacia abajo */
-  width: 100%; /* El botón ocupa el 100% del ancho */
   font-size: 14px; /* Reducir tamaño de fuente */
   padding: 8px; /* Reducir padding */
+
+  
 }
 
 .boton:hover {
@@ -207,6 +216,8 @@ form {
     width: 100%; /* El botón ocupa el 100% del ancho */
     font-size: 16px; /* Ajustar el tamaño de la fuente */
     padding: 12px; /* Aumentar padding para facilidad de clic */
+    margin-left: auto; /* Centra la tabla */
+    margin-right: auto; /* Centra la tabla */
   }
 
   .modal-content {
