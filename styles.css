@@ -3,7 +3,7 @@ body {
   font-family: "Montserrat", Sans-serif;
   margin: 20px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: f4f4f4;
 }
 
 h1 {
@@ -15,9 +15,6 @@ form {
   margin-bottom: 20px;
 }
 
-.planpago {
-  text-align: center; /* Centra los elementos dentro del formulario */
-}
 /* Botón Calcular */
 .boton {
   background-color: #DCF028;
@@ -25,13 +22,10 @@ form {
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 20px;
-  width: 40%;  /* Botón con un ancho fijo */
-  font-size: 14px;
-  padding: 8px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block; /* Necesario para centrar con margin-left y margin-right */
+  margin-top: 20px; /* Mueve el botón hacia abajo */
+  width: 100%; /* El botón ocupa el 100% del ancho */
+  font-size: 14px; /* Reducir tamaño de fuente */
+  padding: 8px; /* Reducir padding */
 }
 
 .boton:hover {
@@ -44,7 +38,7 @@ table {
   border-collapse: collapse;
   width: 50%; /* Hacer la tabla más pequeña en pantallas grandes */
   margin-top: 20px;
-  background-color: white;
+  background-color: #f4f4f4;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
@@ -55,7 +49,7 @@ table {
   border-collapse: collapse;
   width: 80%; /* Ajustamos el ancho en pantallas grandes */
   margin-top: 20px;
-  background-color: white;
+  background-color: f4f4f4;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-left: auto;
   margin-right: auto;
@@ -75,7 +69,7 @@ table {
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #f4f4f4;
   text-align: center;
   padding: 8px; /* Reducir padding de las celdas */
 }
@@ -86,11 +80,11 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: #f4f4f4;
 }
 
 tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f4f4f4;
 }
 
 /* Resultados */
@@ -108,7 +102,7 @@ input::placeholder, select::placeholder {
 }
 
 /* Estilo para los campos de entrada y el select */
-input, select {
+input, select, button {
   padding: 8px; /* Reducir padding */
   margin: 5px 0;
   font-size: 14px; /* Reducir el tamaño de la fuente */
@@ -132,6 +126,10 @@ form {
   text-align: center; /* Centra los elementos dentro del formulario */
 }
 
+.planpago {
+  text-align: center; /* Centra los elementos dentro del formulario */
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -141,7 +139,7 @@ form {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: #f4f4f4;
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
 }
@@ -152,7 +150,7 @@ form {
   border: 1px solid #888;
   width: 80%;  /* Ajustamos el tamaño para escritorio */
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px #f4f4f4;
   margin-left: auto; /* Centra la tabla */
   margin-right: auto; /* Centra la tabla */
 }
