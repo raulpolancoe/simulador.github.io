@@ -180,6 +180,12 @@ function actualizarCamposDinamicos(prestamo, plazoMaximo, tasaAnual) {
     document.getElementById('tasaInteres').textContent = formatoPorcentaje(tasaMensual);   
 }
 
+// Cerrar la tabla si se modifica el valor del préstamo
+document.getElementById('prestamo').addEventListener('input', function () {
+    // Cerrar el modal si está abierto
+    document.getElementById('resultado-modal').style.display = "none";
+});
+
 // Evento para manejar la entrada del monto y actualizar dinámicamente
 // Función para manejar la entrada del monto y actualizar dinámicamente
 // Función para manejar la entrada del monto y actualizar dinámicamente
